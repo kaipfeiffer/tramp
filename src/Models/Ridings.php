@@ -41,7 +41,7 @@ class Ridings extends AbstractDAO
         'origin_id' => array('type' => 'int', 'length' => 16, 'signed' => false),
         'destination_id' => array('type' => 'int', 'length' => 16, 'signed' => false),
         'passengers' => array('type' => 'int', 'length' => 2, 'signed' => false),
-        'description' => array('type' => 'bigint', 'signed' => false),
+        'description' => array('type' => 'string',),
         'start_date' => array('type' => 'datetime'),
         'end_date' => array('type' => 'datetime'),
         'owner' => array('type' => 'int', 'length' => 16, 'signed' => false),
@@ -57,7 +57,7 @@ class Ridings extends AbstractDAO
      *
      * @since   1.0
      */
-    protected static $keys = array();
+    protected $keys = array();
 
 
     /**
@@ -65,7 +65,7 @@ class Ridings extends AbstractDAO
      *
      * @since   1.0
      */
-    protected static $unique_keys = array();
+    protected $unique_keys = array();
 
 
     /**
@@ -73,7 +73,7 @@ class Ridings extends AbstractDAO
      *
      * @since   1.0
      */
-    protected static $primary_key = 'id';
+    protected $primary_key = 'id';
 
 
     /**
