@@ -24,12 +24,12 @@ abstract class AbstractDAO
         $this->db   = $db;
     }
 
-    public function read(int|null $id = null, int|null $page = null)
+    public function read(int $id = null, int $page = null)
     {
         return $this->db->table($this->tablename)->read();
     }
 
-    public function read_by(array $query, int|null $page = null) {}
+    public function read_by(array $query, int $page = null) {}
 
     public function create(array $row) {}
 
