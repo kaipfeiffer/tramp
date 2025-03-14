@@ -35,8 +35,8 @@ class Ridings extends AbstractDAO
      * @since   1.0
      */
     protected $column_types  = array(
-        'id' => array('type' => 'int', 'length' => 16, 'signed' => false),
-        'passenger_id' => array('type' => 'int', 'length' => 16, 'signed' => false),
+        'id' => array('type' => 'int', 'length' => 16, 'signed' => false, 'autoincrement' => true),
+        'passenger_id' => array('type' => 'int', 'length' => 16, 'signed' => false, 'autoincrement' => true),
         'driver_id' => array('type' => 'int', 'length' => 16, 'signed' => false),
         'origin_id' => array('type' => 'int', 'length' => 16, 'signed' => false),
         'destination_id' => array('type' => 'int', 'length' => 16, 'signed' => false),
