@@ -4,26 +4,24 @@ namespace Kaipfeiffer\Tramp\Models;
 
 use Kaipfeiffer\Tramp\Abstracts\AbstractDAO;
 
-class Tramps extends AbstractDAO
+class Users extends AbstractDAO
 {
     /**
      * The table columns
      *
-     * @since   1.0
+     * @since   1.0.1
      */
     protected $columns  = array(
         'id' => '%d',
+        'location_id' => '%d',
+        'hub_id' => '%d',
         'title' => '%s',
         'givenname' => '%s',
         'familyname' => '%s',
-        'street' => '%s',
-        'zipcode' => '%s',
-        'city' => '%s',
-        'region' => '%s',
-        'country' => '%s',
-        'latitude' => '%f',
-        'longitude' => '%f',
         'birthday' => '%s',
+        'email'  => '%s',
+        'phone'  => '%s',
+        'cell'  => '%s',
         'identity_card_number'  => '%s',
         'identity_card_validity'  => '%s',
         'created' => '%s',
@@ -34,22 +32,20 @@ class Tramps extends AbstractDAO
 
     /**
      * The table columns
-     *
-     * @since   1.0
+     * 
+     * @since   1.0.1
      */
     protected $column_types  = array(
         'id' => array('type' => 'int', 'length' => 16, 'signed' => false, 'null' => false, 'autoincrement' => true),
+        'location_id' => array('type' => 'int', 'length' => 16, 'signed' => false),
+        'hub_id' => array('type' => 'int', 'length' => 16, 'signed' => false),
         'title' =>  array('type' => 'string','length' => 50,),
         'givenname' =>  array('type' => 'string','length' => 100,),
         'familyname' => array('type' => 'string','length' => 100,),
-        'street' => array('type' => 'string','length' => 100,),
-        'zipcode' => array('type' => 'string','length' => 10,),
-        'city' => array('type' => 'string','length' => 200,),
-        'region' => array('type' => 'string','length' => 100,),
-        'country' => array('type' => 'string','length' => 100,),
-        'latitude' => array('type' => 'float',),
-        'longitude' => array('type' => 'float',),
         'birthday' => array('type' => 'date'),
+        'email'  => array('type' => 'string','length' => 200,),
+        'phone'  => array('type' => 'string','length' => 32,),
+        'cell'  => array('type' => 'string','length' => 32,),
         'identity_card_number'  => array('type' => 'string','length' => 32,),
         'identity_card_validity'  => array('type' => 'date'),
         'created' => array('type' => 'datetime'),
@@ -61,15 +57,15 @@ class Tramps extends AbstractDAO
     /**
      * List of keys
      *
-     * @since   1.0
+     * @since   1.0.1
      */
-    protected $keys = array(array('familyname'),array('latitude','longitude'));
+    protected $keys = array(array('familyname'),array('hub_id'));
 
 
     /**
      * List of unique keys
      *
-     * @since   1.0
+     * @since   1.0.1
      */
     protected $unique_keys = array();
 
@@ -77,7 +73,7 @@ class Tramps extends AbstractDAO
     /**
      * The name of the primary column
      *
-     * @since   1.0
+     * @since   1.0.1
      */
     protected $primary_key = 'id';
 
@@ -85,7 +81,7 @@ class Tramps extends AbstractDAO
     /**
      * The associated tablename
      *
-     * @since   1.0
+     * @since   1.0.1
      */
-    protected $tablename = 'tramps';
+    protected $tablename = 'users';
 }
