@@ -4,18 +4,34 @@ namespace Kaipfeiffer\Tramp;
 
 use Kaipfeiffer\Tramp\Interfaces\DAOConnector;
 use Kaipfeiffer\Tramp\DAOConnectors\MockedDAO;
+use Kaipfeiffer\Tramp\Models\Locations;
 use Kaipfeiffer\Tramp\Models\Ridings;
-use Kaipfeiffer\Tramp\Models\Tramps;
+use Kaipfeiffer\Tramp\Models\Users;
 
 class Tramp
 {
+
+    /**
+     * connector to database
+     *
+     * @var     DAOConnector
+     * @since   1.0.0
+     */
     protected $db;
 
-    public static function hello($dao)
+    
+    /**
+     * setup
+     * 
+     * @param   DAOConnector
+     * @since   1.0.0
+     */
+    public static function setup($dao)
     {
         $models   = array(
+            Locations::class,
             Ridings::class,
-            Tramps::class,
+            Users::class,
         );
         $result = 0;
 
@@ -26,7 +42,7 @@ class Tramp
         }
 
         foreach($models as $class){
-            $model  = new ($class)($db);
+            $model  = new $class($db);
             $result += $model->create_table();
         }
         return $result;
