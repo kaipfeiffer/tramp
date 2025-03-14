@@ -5,6 +5,7 @@
     "keywords": [ "php" ],
     "homepage": "https://loworx.com",
     "license": "LGPL-3.0-or-later",
+    "version": "1.0.1",
     "authors": [
         {
             "name": "Kai Pfeiffer",
