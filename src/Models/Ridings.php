@@ -9,6 +9,7 @@ class Ridings extends AbstractDAO
     /**
      * The table columns
      *
+     * @var     array
      * @since   1.0
      */
     protected $columns  = array(
@@ -32,11 +33,12 @@ class Ridings extends AbstractDAO
     /**
      * The table columns
      *
+     * @var     array
      * @since   1.0
      */
     protected $column_types  = array(
-        'id' => array('type' => 'int', 'length' => 16, 'signed' => false, 'autoincrement' => true),
-        'passenger_id' => array('type' => 'int', 'length' => 16, 'signed' => false, 'autoincrement' => true),
+        'id' => array('type' => 'int', 'length' => 16, 'signed' => false, 'null' => false, 'autoincrement' => true),
+        'passenger_id' => array('type' => 'int', 'length' => 16, 'signed' => false, 'null' => true,  'autoincrement' => true),
         'driver_id' => array('type' => 'int', 'length' => 16, 'signed' => false),
         'origin_id' => array('type' => 'int', 'length' => 16, 'signed' => false),
         'destination_id' => array('type' => 'int', 'length' => 16, 'signed' => false),
@@ -55,44 +57,35 @@ class Ridings extends AbstractDAO
     /**
      * List of keys
      *
+     * @var     array
      * @since   1.0
      */
     protected $keys = array();
 
 
     /**
-     * List of unique keys
-     *
-     * @since   1.0
-     */
-    protected $unique_keys = array();
-
-
-    /**
      * The name of the primary column
      *
+     * @var     string
      * @since   1.0
      */
     protected $primary_key = 'id';
 
 
     /**
+     * List of unique keys
+     *
+     * @var     array
+     * @since   1.0
+     */
+    protected $unique_keys = array();
+
+
+    /**
      * The associated tablename
      *
+     * @var     string
      * @since   1.0
      */
     protected $tablename = 'ridings';
-
-    function create_table_data()
-    {
-        $data   = array(
-            'column_types'  => $this->column_types,
-            'keys'  => $this->keys,
-            'unique_keys'   => $this->unique_keys,
-            'primary_key'   => $this->primary_key,
-            'tablename' => $this->tablename,
-        );
-
-        return $data;
-    }
 }
