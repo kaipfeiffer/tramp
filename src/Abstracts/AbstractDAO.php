@@ -22,7 +22,7 @@ abstract class AbstractDAO
      * The table columns
      *
      * @var     array
-     * @since   1.0
+     * @since   1.0.0
      */
     protected $columns;
 
@@ -31,7 +31,7 @@ abstract class AbstractDAO
      * The table columns
      *
      * @var     array
-     * @since   1.0
+     * @since   1.0.0
      */
     protected $column_types;
 
@@ -40,7 +40,7 @@ abstract class AbstractDAO
      * List of keys
      *
      * @var     array
-     * @since   1.0
+     * @since   1.0.0
      */
     protected $keys;
 
@@ -49,7 +49,7 @@ abstract class AbstractDAO
      * The name of the primary column
      *
      * @var     string
-     * @since   1.0
+     * @since   1.0.0
      */
     protected $primary_key;
 
@@ -58,7 +58,7 @@ abstract class AbstractDAO
      * List of unique keys
      *
      * @var     array
-     * @since   1.0
+     * @since   1.0.0
      */
     protected $unique_keys;
 
@@ -67,7 +67,7 @@ abstract class AbstractDAO
      * The associated tablename
      *
      * @var     string
-     * @since   1.0
+     * @since   1.0.0
      */
     protected $tablename;
 
@@ -76,6 +76,7 @@ abstract class AbstractDAO
      * constructor
      * 
      * @param DAOConnector
+     * @since   1.0.0
      */
     public function __construct(DAOConnector $db)
     {
@@ -87,6 +88,7 @@ abstract class AbstractDAO
      * create row
      * 
      * @param   array
+     * @since   1.0.0
      */
     public function create(array $row) {}
 
@@ -95,6 +97,7 @@ abstract class AbstractDAO
      * delete row
      * 
      * @param   array
+     * @since   1.0.0
      */
     public function delete(array $row) {}
 
@@ -102,6 +105,7 @@ abstract class AbstractDAO
     /**
      * create table
      * 
+     * @since   1.0.0
      */
     function create_table()
     {
@@ -123,6 +127,7 @@ abstract class AbstractDAO
      * 
      * @param   integer
      * @param   integer
+     * @since   1.0.0
      */
     public function read(int $id = null, int $page = null)
     {
@@ -135,6 +140,7 @@ abstract class AbstractDAO
      * 
      * @param   array
      * @param   integer
+     * @since   1.0.0
      */
     public function read_by(array $query, int $page = null) {}
 
@@ -143,6 +149,7 @@ abstract class AbstractDAO
      * updaterow
      * 
      * @param   array
+     * @since   1.0.0
      */
     public function update(array $row) {}
 }
