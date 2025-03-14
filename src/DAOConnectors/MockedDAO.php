@@ -15,40 +15,18 @@ class MockedDAO implements DAOConnector
         $this->table = $table;
     }
 
-    public function read(int $id = null, int $page = null)
+    public function read($id = null, $page = null)
     {
         return $this->table;
     }
 
-    public function read_by(array $query, int $page = null) {}
+    public function read_by(array $query, $page = null) {}
 
     public function create(array $row) {}
 
     public function create_table(array $data)
     {
-        global $wpdb;
-        $table_name = $wpdb->prefix . $data['tablename'];
-        $wpdb_collate = $wpdb->collate;
-
-        foreach( $data['column_types'] as $column_name => $column_data){
-
-        }
-
-        $sql =sprintf(
-            'CREATE TABLE %s (
-            %s
-            PRIMARY KEY  (%s),
-            %s
-            )
-            COLLATE %s',
-            $table_name,
-            '', // columns
-            $data['primary_key'],
-            '', // keys
-            $wpdb_collate
-        );
-
-        return $sql;//print_r($data, 1);
+        return print_r($data, 1);
     }
 
     public function update(array $row) {}
