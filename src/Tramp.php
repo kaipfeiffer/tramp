@@ -2,6 +2,7 @@
 
 namespace Kaipfeiffer\Tramp;
 
+use Kaipfeiffer\Tramp\Interfaces\DAOConnector;
 use Kaipfeiffer\Tramp\DAOConnectors\MockedDAO;
 use Kaipfeiffer\Tramp\Models\Ridings;
 
@@ -9,11 +10,18 @@ class Tramp
 {
     protected $db;
 
-    public function hello()
+    public function hello($dao)
     {
-        $db   = new MockedDAO('test');
+
+        if($dao instanceof DAOConnector){
+            $db   = $dao;
+        }
+        else{
+            $db   = new MockedDAO('test');
+        }
         $ridings    = new Ridings($db);
         
-        return $db->create_table($ridings->create_table_data());
+        $table_data = $ridings->create_table_data();
+        return $db->create_table($table_data);
     }
 }
