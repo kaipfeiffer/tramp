@@ -2,7 +2,8 @@
 
 namespace Kaipfeiffer\Tramp\Abstracts;
 
-use Kaipfeiffer\Tramp\Interfaces\DAOConnector;
+use Kaipfeiffer\Tramp\Interfaces\DaoConnectorInterface;
+use Kaipfeiffer\Tramp\Interfaces\DaoModelInterface;
 
 /**
  * Abstract Static Class for Database-Access via wpdb
@@ -12,12 +13,12 @@ use Kaipfeiffer\Tramp\Interfaces\DAOConnector;
  * @since   1.0.0 
  */
 
-abstract class AbstractDAO
+abstract class AbstractDAO implements DaoModelInterface
 
 {
     protected $db;
 
-    
+
     /**
      * The table columns
      *
@@ -73,12 +74,43 @@ abstract class AbstractDAO
 
 
     /**
+     * PROTECTED METHODS
+     */
+
+
+    /**
+     * default_values
+     * 
+     * @return   array
+     * @since   1.0.0
+     */
+    protected function default_values(){
+        return array();
+    }
+
+
+    /**
+     * on_update_values
+     * 
+     * @return   array
+     * @since   1.0.0
+     */
+    protected function on_update_values(){
+        return array();
+    }
+
+
+    /**
+     * PUBLIC METHODS
+     */
+
+    /**
      * constructor
      * 
      * @param DAOConnector
      * @since   1.0.0
      */
-    public function __construct(DAOConnector $db)
+    public function __construct(DAOConnectorInterface $db)
     {
         $this->db   = $db;
     }
@@ -90,16 +122,29 @@ abstract class AbstractDAO
      * @param   array
      * @since   1.0.0
      */
-    public function create(array $row) {}
+    public function create(array $row):?int
+    {
+        $sanitized  = $this->default_values();
 
-    
+        foreach ($row as $key => $value) {
+            if (isset($this->columns[$key])) {
+                $sanitized[$key]    = sprintf($this->columns[$key], $value);
+            }
+        }
+        $result = $this->db->table($this->tablename)->create($sanitized);
+        return $result;
+    }
+
+
     /**
      * delete row
      * 
      * @param   array
      * @since   1.0.0
      */
-    public function delete(array $row) {}
+    public function delete(array $row):?bool {
+        return false;
+    }
 
 
     /**
@@ -107,7 +152,7 @@ abstract class AbstractDAO
      * 
      * @since   1.0.0
      */
-    function create_table()
+    public function create_table():?int
     {
         $data   = array(
             'column_types'  => $this->column_types,
@@ -117,11 +162,11 @@ abstract class AbstractDAO
             'tablename' => $this->tablename,
         );
 
-        $result = $this->db->create_table($data);
+        $result = $this->db->table($this->tablename)->create_table($data);
         return $result;
     }
 
-    
+
     /**
      * read row
      * 
@@ -129,12 +174,12 @@ abstract class AbstractDAO
      * @param   integer
      * @since   1.0.0
      */
-    public function read(int $id = null, int $page = null)
+    public function read(?int $id = null, ?int $page = null):?array
     {
         return $this->db->table($this->tablename)->read();
     }
 
-    
+
     /**
      * read row by query
      * 
@@ -142,14 +187,18 @@ abstract class AbstractDAO
      * @param   integer
      * @since   1.0.0
      */
-    public function read_by(array $query, int $page = null) {}
+    public function read_by(array $query, ?int $page = null): ?array {
+        return null;
+    }
 
-    
+
     /**
      * updaterow
      * 
      * @param   array
      * @since   1.0.0
      */
-    public function update(array $row) {}
+    public function update(array $row):?int {
+        return null;
+    }
 }

@@ -10,7 +10,7 @@ class Ridings extends AbstractDAO
      * The table columns
      *
      * @var     array
-     * @since   1.0
+     * @since   1.0.0
      */
     protected $columns  = array(
         'id' => '%d',
@@ -34,7 +34,7 @@ class Ridings extends AbstractDAO
      * The table columns
      *
      * @var     array
-     * @since   1.0
+     * @since   1.0.0
      */
     protected $column_types  = array(
         'id' => array('type' => 'int', 'length' => 16, 'signed' => false, 'null' => false, 'autoincrement' => true),
@@ -58,7 +58,7 @@ class Ridings extends AbstractDAO
      * List of keys
      *
      * @var     array
-     * @since   1.0
+     * @since   1.0.0
      */
     protected $keys = array();
 
@@ -67,7 +67,7 @@ class Ridings extends AbstractDAO
      * The name of the primary column
      *
      * @var     string
-     * @since   1.0
+     * @since   1.0.0
      */
     protected $primary_key = 'id';
 
@@ -76,7 +76,7 @@ class Ridings extends AbstractDAO
      * List of unique keys
      *
      * @var     array
-     * @since   1.0
+     * @since   1.0.0
      */
     protected $unique_keys = array();
 
@@ -85,7 +85,7 @@ class Ridings extends AbstractDAO
      * The associated tablename
      *
      * @var     string
-     * @since   1.0
+     * @since   1.0.0
      */
     protected $tablename = 'ridings';
 }
