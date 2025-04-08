@@ -88,7 +88,7 @@ class LocationController extends AbstractController
             'street'        => $street_number . ' ' . $street_name,
             'format'        => $data['format'],
             'country'       => $data['country'] ?? 'germany',
-            // 'email'         => 'tramp-lib@loworx.com',
+            'email'         => 'tramp-lib@loworx.com',
         ), true);
 
         if ($result['err']) {

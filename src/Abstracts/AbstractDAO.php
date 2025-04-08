@@ -99,7 +99,8 @@ abstract class AbstractDAO implements DaoModelInterface
      * @return   array
      * @since   1.0.0
      */
-    protected function default_values(){
+    protected function default_values()
+    {
         return array();
     }
 
@@ -110,7 +111,8 @@ abstract class AbstractDAO implements DaoModelInterface
      * @return   array
      * @since   1.0.0
      */
-    protected function on_update_values(){
+    protected function on_update_values()
+    {
         return array();
     }
 
@@ -137,7 +139,7 @@ abstract class AbstractDAO implements DaoModelInterface
      * @param   array
      * @since   1.0.0
      */
-    public function create(array $row):?int
+    public function create(array $row): ?int
     {
         $sanitized  = $this->default_values();
 
@@ -157,7 +159,8 @@ abstract class AbstractDAO implements DaoModelInterface
      * @param   array
      * @since   1.0.0
      */
-    public function delete(array $row):?bool {
+    public function delete(array $row): ?bool
+    {
         return false;
     }
 
@@ -167,7 +170,7 @@ abstract class AbstractDAO implements DaoModelInterface
      * 
      * @since   1.0.0
      */
-    public function create_table():?int
+    public function create_table(): ?int
     {
         $data   = array(
             'column_types'  => $this->column_types,
@@ -177,7 +180,7 @@ abstract class AbstractDAO implements DaoModelInterface
             'tablename' => $this->tablename,
         );
 
-        error_log(__CLASS__.'->'.__LINE__.'->TABLE:'.$this->tablename);
+        error_log(__CLASS__ . '->' . __LINE__ . '->TABLE:' . $this->tablename);
         $result = $this->db->table($this->tablename)->create_table($data);
         return $result;
     }
@@ -189,11 +192,11 @@ abstract class AbstractDAO implements DaoModelInterface
      * @return  array
      * @since   1.0.0
      */
-    public function get_editable_columns():array
+    public function get_editable_columns(): array
     {
-        $editable_columns = array_diff_key($this->columns,$this->hidden_columns);
+        $editable_columns = array_diff_key($this->columns, $this->hidden_columns);
 
-        foreach($editable_columns as $key => $value){
+        foreach ($editable_columns as $key => $value) {
             $editable_columns[$key] = '';
         }
         return $editable_columns;
@@ -207,10 +210,10 @@ abstract class AbstractDAO implements DaoModelInterface
      * @param   integer
      * @since   1.0.0
      */
-    public function read(?int $id = null, ?int $page = null):?array
+    public function read(?int $id = null, ?int $page = null): ?array
     {
-        echo __CLASS__.'->'.__LINE__.'->'.$this->tablename.'<hr />';
-        return $this->db->table($this->tablename)->read();
+        echo __CLASS__ . '->' . __LINE__ . '->' . $this->tablename . '<hr />';
+        return $this->db->table($this->tablename)->read($id, $page);
     }
 
 
@@ -221,8 +224,27 @@ abstract class AbstractDAO implements DaoModelInterface
      * @param   integer
      * @since   1.0.0
      */
-    public function read_by(array $query, ?int $page = null): ?array {
+    public function read_by(array $query, ?int $page = null): ?array
+    {
         return null;
+    }
+
+
+    /**
+     * save row
+     * 
+     * @param   array
+     * @return  int
+     * @since   1.0.0
+     */
+    public function save(array $row): ?int
+    {
+        if ($row[$this->primary_key] ?? null) {
+            return $this->update($row);
+        }
+        else{
+            return $this->create($row);
+        }
     }
 
 
@@ -232,7 +254,8 @@ abstract class AbstractDAO implements DaoModelInterface
      * @param   array
      * @since   1.0.0
      */
-    public function update(array $row):?int {
+    public function update(array $row): ?int
+    {
         $sanitized  = $this->default_values();
 
         foreach ($row as $key => $value) {
