@@ -55,6 +55,23 @@ class Users extends AbstractDAO
 
 
     /**
+     * The table columns
+     *
+     * @var     array
+     * @since   1.0.0
+     */
+    protected $hidden_columns = array(
+        'created'       => null,
+        'deleted'       => null,
+        'location_id'   => null,
+        'hub_id'        => null,
+        'id'            => null,
+        'status'        => null,
+        'updated'       => null,
+    );
+
+
+    /**
      * List of keys
      *
      * @since   1.0.1
@@ -83,5 +100,5 @@ class Users extends AbstractDAO
      *
      * @since   1.0.1
      */
-    protected $tablename = 'users';
+    protected $tablename = 'tramps';
 }

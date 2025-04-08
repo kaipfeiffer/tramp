@@ -5,9 +5,9 @@ namespace Kaipfeiffer\Tramp\Controllers;
 use Kaipfeiffer\Tramp\Interfaces\DaoModelInterface;
 
 use Kaipfeiffer\Tramp\Abstracts\AbstractController;
-use Kaipfeiffer\Tramp\Models\Ridings;
+use Kaipfeiffer\Tramp\Models\Users;
 
-class RidingController extends AbstractController
+class UserController extends AbstractController
 {
 
 
@@ -35,7 +35,7 @@ class RidingController extends AbstractController
             if (!static::$dao) {
                 throw new \Exception('Inject DAOConnector before creating rows');
             }
-            static::$model  = new Ridings(static::$dao);
+            static::$model  = new Users(static::$dao);
         }
         return static::$model;
     }

@@ -11,6 +11,14 @@ use Kaipfeiffer\Tramp\Models\Locations;
 class LocationController extends AbstractController
 {
 
+
+    /**
+     * model
+     *
+     * @since   1.0.1
+     */
+    static $model;
+
     /**
      * PROTECTED METHODS
      */
@@ -25,7 +33,7 @@ class LocationController extends AbstractController
     {
         if (!static::$model) {
             if (!static::$dao) {
-                throw new \Exception('Inject DAOConnector before creating rows');
+                throw new \Exception('Inject DAOConnector before using model');
             }
             static::$model  = new Locations(static::$dao);
         }
@@ -48,6 +56,7 @@ class LocationController extends AbstractController
     {
         $data   += static::get_geo_data($data);
 
+        error_log(__CLASS__.'->'.__LINE__.'->'.print_r($data,1));
         $model  = static::get_model();
 
         /**
@@ -90,6 +99,7 @@ class LocationController extends AbstractController
 
         if (is_array($result['response']) && \array_is_list($result['response'])) {
             $geodata            = reset($result['response']);
+            error_log(__CLASS__ . '->' . __LINE__ . '->' . print_r($geodata, 1));
             $result = array(
                 'latitude'   => $geodata['lat'],
                 'longitude'  => $geodata['lon'],

@@ -2,7 +2,7 @@
 
 namespace Kaipfeiffer\Tramp;
 
-use Kaipfeiffer\Tramp\Interfaces\DAOConnector;
+use Kaipfeiffer\Tramp\Interfaces\DAOConnectorInterface;
 use Kaipfeiffer\Tramp\DAOConnectors\MockedDAO;
 use Kaipfeiffer\Tramp\Models\Locations;
 use Kaipfeiffer\Tramp\Models\Ridings;
@@ -23,7 +23,7 @@ class Tramp
     /**
      * setup
      * 
-     * @param   DAOConnector
+     * @param   DAOConnectorInterface
      * @since   1.0.0
      */
     public static function setup($dao)
@@ -35,7 +35,7 @@ class Tramp
         );
         $result = 0;
 
-        if ($dao instanceof DAOConnector) {
+        if ($dao instanceof DAOConnectorInterface) {
             $db   = $dao;
         } else {
             $db   = new MockedDAO('test');
@@ -45,6 +45,8 @@ class Tramp
             $model  = new $class($db);
             $result += $model->create_table();
         }
+        error_log(__CLASS__.'->'.__LINE__.'->'.$result);
+
         return $result;
     }
 }

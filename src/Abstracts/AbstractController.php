@@ -47,8 +47,37 @@ abstract class AbstractController
 
 
     /**
+     * get_editable_columns 
+     * 
+     * @return  array
+     * @since   1.0.0
+     */
+    public static function get_editable_columns():array
+    {
+        $model = static::get_model();
+        return $model->get_editable_columns();
+    }
+
+
+    /**
      * PUBLIC METHODS
      */
+
+
+    /**
+     * read row
+     * 
+     * @param   integer
+     * @param   integer
+     * @since   1.0.0
+     */
+    public static function read(?int $id = null, ?int $page = null):?array
+    {
+        $model = static::get_model();
+        echo __CLASS__.'->'.__LINE__.'->'.$id.'<hr />';
+        return $model->read($id, $page);
+    }
+
 
     /**
      * create
@@ -72,6 +101,7 @@ abstract class AbstractController
     public static function create(array $data)
     {
         $model = static::get_model();
+        error_log(__CLASS__.'->'.__LINE__.'->'.print_r($data,1));
         return $model->create($data);
     }
 }

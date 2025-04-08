@@ -29,7 +29,7 @@ class MockedDAO implements DaoConnectorInterface
     }
 
     public function create_table(array $row):?int{
-        return print_r($row, 1);
+        return 1;
     }
 
     public function update(array $row):?int{
@@ -40,7 +40,7 @@ class MockedDAO implements DaoConnectorInterface
         return false;
     }
 
-    public function table(string $table):self{
+    public function table(string $table):DaoConnectorInterface{
         $this->table = $table;
         return $this;
     }
