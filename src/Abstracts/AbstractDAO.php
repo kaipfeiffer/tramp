@@ -212,7 +212,6 @@ abstract class AbstractDAO implements DaoModelInterface
      */
     public function read(?int $id = null, ?int $page = null): ?array
     {
-        echo __CLASS__ . '->' . __LINE__ . '->' . $this->tablename . '<hr />';
         return $this->db->table($this->tablename)->read($id, $page);
     }
 
