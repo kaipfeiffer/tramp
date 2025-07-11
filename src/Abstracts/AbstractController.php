@@ -55,6 +55,7 @@ abstract class AbstractController
     public static function get_editable_columns():array
     {
         $model = static::get_model();
+
         return $model->get_editable_columns();
     }
 
@@ -74,13 +75,15 @@ abstract class AbstractController
     public static function read(?int $id = null, ?int $page = null):?array
     {
         $model = static::get_model();
-        echo __CLASS__.'->'.__LINE__.'->'.$id.'<hr />';
-        return $model->read($id, $page);
+        
+        $data       = $model->read($id, $page);
+        $columns    = $model->get_editable_columns();
+        return array_intersect_key($data, $columns);
     }
 
 
     /**
-     * create
+     * set_dao
      * 
      * @param   DaoConnectorInterface
      * @since   1.0.1 
@@ -101,7 +104,39 @@ abstract class AbstractController
     public static function create(array $data)
     {
         $model = static::get_model();
-        error_log(__CLASS__.'->'.__LINE__.'->'.print_r($data,1));
+
         return $model->create($data);
+    }
+
+
+    /**
+     * check
+     * 
+     * checks if the submitted date is valid
+     * the messages should be stored in the value of the associated column
+     * 
+     * @param   array
+     * @return  array
+     * @since   1.0.1
+     */
+    public static function check(array $data): array
+    {
+        $model = static::get_model();
+        $columns    = $model->get_editable_columns();
+        return array_diff_key($columns, $data);
+    }
+
+
+    /**
+     * update
+     * 
+     * @param   array   $data
+     * @return  boolean true on success, false on failure
+     * @since    1.0.0
+     */
+    public static function update(array $data): int
+    {
+        $model = static::get_model();
+        return $model->update($data);
     }
 }
