@@ -60,7 +60,7 @@ class LocationController extends AbstractController
     {
         $columns    = parent::check($data);
         unset($columns['longitude'], $columns['latitude']);
-        
+
         return $columns;
     }
 
@@ -75,14 +75,14 @@ class LocationController extends AbstractController
     {
         $data   += static::get_geo_data($data);
 
-        error_log(__CLASS__.'->'.__LINE__.'->'.print_r($data,1));
+        error_log(__CLASS__ . '->' . __LINE__ . '->' . print_r($data, 1));
         $model  = static::get_model();
 
         /**
          * TODO: check for geodata and create only, if no entry exists
          * otherwise return id of the row
          */
-        
+
         return $model->create($data);
     }
 
@@ -94,27 +94,31 @@ class LocationController extends AbstractController
      * @throws  Exception
      * @since   1.0.1 
      */
-    protected static function get_geo_data($data) 
+    protected static function get_geo_data($data)
     {
         $result = null;
         preg_match('/^(.*)(\d\w*)$/', $data['street'], $matches);
         list($res, $street_name, $street_number) = $matches;
 
-        $openstreetmap  = new CurlHelper('https://nominatim.openstreetmap.org/search');
-        $result         = $openstreetmap->get(array(
+        $parameter  = array(
             'postalcode'    => $data['zipcode'],
             'city'          => $data['city'],
             'street'        => $street_number . ' ' . $street_name,
             'format'        => $data['format'],
             'country'       => $data['country'] ?? 'germany',
             'email'         => 'tramp-lib@loworx.com',
-        ), true);
+        );
+
+        error_log(__CLASS__ . '->' . __LINE__ . '->' . print_r($parameter, 1));
+        
+        $openstreetmap  = new CurlHelper('https://nominatim.openstreetmap.org/search');
+        $result         = $openstreetmap->get($parameter, true);
 
         if ($result['err']) {
             error_log(__CLASS__ . '->' . __LINE__ . '->' . print_r($result['err'], 1));
             throw new \Exception($result['err']);
         }
-        // error_log(__CLASS__ . '->' . __LINE__ . '->' . is_array($result['response']) . '&&' . \array_is_list($result['response']) . '->' . print_r($result, 1));
+        error_log(__CLASS__ . '->' . __LINE__ . '->' . is_array($result['response']) . '&&' . \array_is_list($result['response']) . '->' . print_r($result, 1));
 
         if (is_array($result['response']) && \array_is_list($result['response'])) {
             $geodata            = reset($result['response']);
