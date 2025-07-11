@@ -45,6 +45,25 @@ class LocationController extends AbstractController
      * PUBLIC METHODS
      */
 
+
+    /**
+     * check
+     * 
+     * checks if the submitted date is valid
+     * the messages should be stored in the value of the associated column
+     * 
+     * @param   array
+     * @return  array
+     * @since   1.0.1
+     */
+    public static function check(array $data): array
+    {
+        $columns    = parent::check($data);
+        unset($columns['longitude'], $columns['latitude']);
+        
+        return $columns;
+    }
+
     /**
      * create
      * 
