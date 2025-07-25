@@ -5,7 +5,7 @@ namespace Kaipfeiffer\Tramp\Controllers;
 use Kaipfeiffer\Tramp\Interfaces\DaoModelInterface;
 
 use Kaipfeiffer\Tramp\Abstracts\AbstractController;
-use Kaipfeiffer\Tramp\Models\Users;
+use Kaipfeiffer\Tramp\Daos\Users;
 
 class UserController extends AbstractController
 {

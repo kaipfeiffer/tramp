@@ -4,9 +4,10 @@ namespace Kaipfeiffer\Tramp;
 
 use Kaipfeiffer\Tramp\Interfaces\DAOConnectorInterface;
 use Kaipfeiffer\Tramp\DAOConnectors\MockedDAO;
-use Kaipfeiffer\Tramp\Models\Locations;
-use Kaipfeiffer\Tramp\Models\Ridings;
-use Kaipfeiffer\Tramp\Models\Users;
+use Kaipfeiffer\Tramp\Daos\Locations;
+use Kaipfeiffer\Tramp\Daos\Ridings;
+use Kaipfeiffer\Tramp\Daos\Stops;
+use Kaipfeiffer\Tramp\Daos\Users;
 
 class Tramp
 {
@@ -32,6 +33,7 @@ class Tramp
             Locations::class,
             Ridings::class,
             Users::class,
+            Stops::class,
         );
         $result = 0;
 

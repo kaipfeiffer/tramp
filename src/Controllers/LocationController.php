@@ -6,7 +6,7 @@ use Kaipfeiffer\Tramp\Interfaces\DaoModelInterface;
 
 use Kaipfeiffer\Tramp\Abstracts\AbstractController;
 use Kaipfeiffer\Tramp\Helpers\CurlHelper;
-use Kaipfeiffer\Tramp\Models\Locations;
+use Kaipfeiffer\Tramp\Daos\Locations;
 
 class LocationController extends AbstractController
 {

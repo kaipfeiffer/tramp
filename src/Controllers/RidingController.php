@@ -5,7 +5,7 @@ namespace Kaipfeiffer\Tramp\Controllers;
 use Kaipfeiffer\Tramp\Interfaces\DaoModelInterface;
 
 use Kaipfeiffer\Tramp\Abstracts\AbstractController;
-use Kaipfeiffer\Tramp\Models\Ridings;
+use Kaipfeiffer\Tramp\Daos\Ridings;
 
 class RidingController extends AbstractController
 {
