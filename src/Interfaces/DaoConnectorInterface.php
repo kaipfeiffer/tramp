@@ -12,6 +12,8 @@ interface DaoConnectorInterface{
 
     public function create_table(array $row): ?int;
 
+    public function get_row_cnt(?array $query):?int;
+
     public function update(array $row): ?int;
 
     public function delete(array $row): bool;
