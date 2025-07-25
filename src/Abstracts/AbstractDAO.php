@@ -71,6 +71,15 @@ abstract class AbstractDAO implements DaoModelInterface
 
 
     /**
+     * the last parameters for a query
+     * 
+     * @var     array|null
+     * @since   1.0.0
+     */
+    protected $query;
+
+
+    /**
      * List of unique keys
      *
      * @var     array
@@ -187,6 +196,18 @@ abstract class AbstractDAO implements DaoModelInterface
 
 
     /**
+     * get_primary_key 
+     * 
+     * @return  int
+     * @since   1.0.0
+     */
+    public function get_primary_key(): string
+    {
+        return $this->primary_key;
+    }
+
+
+    /**
      * get_editable_columns 
      * 
      * @return  array
@@ -204,15 +225,30 @@ abstract class AbstractDAO implements DaoModelInterface
 
 
     /**
-     * read row
+     * get row count
      * 
-     * @param   integer
-     * @param   integer
+     * get the number of rows in the table
+     * 
+     * @return  int|null
      * @since   1.0.0
      */
-    public function read(?int $id = null, ?int $page = null): ?array
+    public function get_row_cnt(): ?int
+    {  
+        return $this->db->table($this->tablename)->get_row_cnt($this->query);
+    }
+
+
+    /**
+     * read row
+     * 
+     * @param   int
+     * @param   int
+     * @param   int
+     * @since   1.0.0
+     */
+    public function read(?int $id = null, ?int $page = null, ?int $per_page = null): ?array
     {
-        return $this->db->table($this->tablename)->read($id, $page);
+        return $this->db->table($this->tablename)->read($id, $page, $per_page);
     }
 
 
@@ -220,12 +256,14 @@ abstract class AbstractDAO implements DaoModelInterface
      * read row by query
      * 
      * @param   array
-     * @param   integer
+     * @param   int
+     * @param   int
      * @since   1.0.0
      */
-    public function read_by(array $query, ?int $page = null): ?array
+    public function read_by(array $query, ?int $page = null, ?int $per_page = null): ?array
     {
-        return null;
+        $this->query    = $query;
+        return $this->db->table($this->tablename)->read_by($query, $page, $per_page);
     }
 
 
@@ -240,8 +278,7 @@ abstract class AbstractDAO implements DaoModelInterface
     {
         if ($row[$this->primary_key] ?? null) {
             return $this->update($row);
-        }
-        else{
+        } else {
             return $this->create($row);
         }
     }

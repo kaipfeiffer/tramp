@@ -12,7 +12,11 @@ interface DaoModelInterface{
 
     public function create_table():?int;
 
+    public function get_primary_key():string;
+
     public function get_editable_columns():array;
+
+    public function get_row_cnt():?int;
 
     public function update(array $row):?int;
 
